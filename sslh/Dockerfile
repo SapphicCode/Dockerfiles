@@ -1,6 +1,6 @@
 FROM debian:testing-slim
 
-RUN apt-get update && apt-get install -y sslh
+RUN export DEBIAN_FRONTEND=noninteractive && apt-get update && apt-get install -q -y --no-install-recommends sslh
 
 ENTRYPOINT ["sslh", "-v", "-f"]
 CMD []
