@@ -1,9 +1,7 @@
-FROM alpine:edge
+FROM debian:testing-slim
 
-RUN echo "http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories && \
-apk update && \
-apk add sslh
+RUN apt-get update && apt-get install -y sslh
 
-ENTRYPOINT ["sslh"]
+ENTRYPOINT ["sslh", "-v", "-f"]
 CMD []
 
