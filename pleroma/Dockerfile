@@ -5,7 +5,8 @@ ENV MIX_ENV=prod
 RUN apk -U upgrade \
     && apk add --no-cache \
        build-base \
-       git
+       git \
+       imagemagick
 
 RUN adduser -S -D -h /pleroma pleroma
 
