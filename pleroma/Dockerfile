@@ -15,9 +15,16 @@ WORKDIR /pleroma
 
 RUN git clone --depth=1 https://git.pleroma.social/pleroma/pleroma.git /pleroma \
     && mkdir /pleroma/uploads
+RUN touch /pleroma/config/prod.secret.exs \
+    && mix local.rebar --force \
+    && mix local.hex --force \
+    && mix deps.get \
+    && mix deps.compile \
+    && rm /pleroma/config/prod.secret.exs
 
 VOLUME /pleroma/config/prod.secret.exs
 VOLUME /pleroma/uploads/
 
-CMD mix local.rebar --force && mix local.hex --force && mix deps.get && mix compile && mix phx.server
+CMD mix compile && mix phx.server
+EXPOSE 4000
 
