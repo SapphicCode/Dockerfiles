@@ -25,6 +25,6 @@ RUN touch /pleroma/config/prod.secret.exs \
 VOLUME /pleroma/config/prod.secret.exs
 VOLUME /pleroma/uploads/
 
-CMD time mix compile && mix phx.server
+CMD time mix compile && mix ecto.migrate && mix phx.server
 EXPOSE 4000
 
