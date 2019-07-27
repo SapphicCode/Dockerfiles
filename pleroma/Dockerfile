@@ -13,7 +13,8 @@ RUN adduser -S -D -h /pleroma pleroma
 USER pleroma
 WORKDIR /pleroma
 
-RUN git clone --depth=1 https://git.pleroma.social/pleroma/pleroma.git /pleroma \
+ARG branch=master
+RUN git clone --depth=1 --branch=$branch https://git.pleroma.social/pleroma/pleroma.git /pleroma \
     && mkdir -p /pleroma/uploads
 RUN touch /pleroma/config/prod.secret.exs \
     && mix local.rebar --force \
