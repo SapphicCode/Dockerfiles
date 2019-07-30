@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk9-openj9:alpine
+FROM adoptopenjdk/openjdk11-openj9:alpine-jre
 
 ARG uid=1000
 ARG url="https://ci.md-5.net/job/BungeeCord/lastSuccessfulBuild/artifact/bootstrap/target/BungeeCord.jar"

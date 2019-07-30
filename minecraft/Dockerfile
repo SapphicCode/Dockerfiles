@@ -1,4 +1,4 @@
-FROM adoptopenjdk/openjdk8-openj9:alpine
+FROM adoptopenjdk/openjdk11-openj9:alpine-jre
 
 ARG minecraft_url
 
