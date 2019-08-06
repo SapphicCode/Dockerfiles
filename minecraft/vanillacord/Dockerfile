@@ -2,7 +2,7 @@ ARG base=pandentia/minecraft:latest
 
 FROM ${base} AS vanilla
 
-FROM adoptopenjdk/openjdk11:alpine AS build
+FROM adoptopenjdk/openjdk8:alpine AS build
 WORKDIR /tmp/
 COPY --from=vanilla /server/server.jar /tmp/
 COPY vanillacord.jar /tmp/
