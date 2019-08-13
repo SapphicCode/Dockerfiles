@@ -4,7 +4,7 @@ ARG minecraft_url
 
 WORKDIR /server/work
 RUN mkdir -p /server/work
-RUN apk add curl && \
+RUN apk add --no-cache curl && \
     curl -s $minecraft_url -o /server/server.jar && \
     apk del curl
 COPY start.sh /server/
