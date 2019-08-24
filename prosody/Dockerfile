@@ -1,6 +1,6 @@
 FROM alpine:edge
 
-RUN apk add lua-dbi prosody
+RUN apk add --no-cache tini lua-dbi prosody
 
 USER prosody
-ENTRYPOINT ["prosody"]
+ENTRYPOINT ["/sbin/tini", "prosody"]
