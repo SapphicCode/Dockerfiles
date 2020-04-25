@@ -5,7 +5,7 @@ ARG minecraft_url
 WORKDIR /server/work
 RUN mkdir -p /server/work
 RUN apk add --no-cache curl tini && \
-    curl -s $minecraft_url -o /server/server.jar && \
+    curl -s -L $minecraft_url -o /server/server.jar && \
     apk del curl
 COPY start.sh /server/
 RUN chown -R 1000:1000 /server
