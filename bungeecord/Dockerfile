@@ -5,7 +5,7 @@ ARG url="https://ci.md-5.net/job/BungeeCord/lastSuccessfulBuild/artifact/bootstr
 
 RUN mkdir -p /server/work
 RUN apk add curl && \
-	curl $url -o /server/proxy.jar && \
+	curl -s -L $url -o /server/proxy.jar && \
 	apk del curl
 RUN chown -R $uid:$uid /server
 
