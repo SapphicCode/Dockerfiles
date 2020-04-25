@@ -12,7 +12,7 @@ RUN apk add --no-cache \
 USER pleroma
 WORKDIR /pleroma
 
-ARG branch=master
+ARG branch=stable
 RUN git clone --depth=1 --branch=$branch https://git.pleroma.social/pleroma/pleroma.git /pleroma \
     && mkdir -p /pleroma/uploads
 RUN touch /pleroma/config/prod.secret.exs \
