@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:alpine
+FROM jenkins/jenkins:lts-alpine
 
 USER root
 RUN apk add --no-cache curl jq docker && \
