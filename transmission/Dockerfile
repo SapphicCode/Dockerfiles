@@ -1,5 +1,5 @@
 FROM alpine:edge
 
-RUN apk add --no-cache transmission-daemon transmission-cli
+RUN apk add --no-cache tini transmission-daemon transmission-cli
 
-ENTRYPOINT ["transmission-daemon", "-f"]
+ENTRYPOINT [ "tini", "transmission-daemon", "-f"]
