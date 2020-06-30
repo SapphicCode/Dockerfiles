@@ -2,7 +2,11 @@
 
 # check we're not in a pull request
 if [ -n "$TRAVIS" ]; then
-  if [ "$TRAVIS_BRANCH" != "master" ] || [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+  if [ "$TRAVIS_BRANCH" != "master" ]; then
+    echo "Other branch detected, ignoring push."
+    return 0
+  elif [ "$TRAVIS_PULL_REQUEST" != "false" ]; then
+    echo "Pull request detected, ignoring push."
     return 0
   fi
 fi
