@@ -10,17 +10,13 @@ cache:
 jobs:
   include:
     - stage: Setup
-      branches:
-        only:
-          - master
+      if: branch = master
       install:
         - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - stage: Build
       script:
         - minecraft/build.sh
     - stage: Push
-      branches:
-        only:
-          - master
+      if: branch = master
       script:
         - utils/push.sh
