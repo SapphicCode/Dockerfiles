@@ -1,0 +1,12 @@
+services:
+  - docker
+
+cache:
+  directories:
+    "./cache"
+
+install:
+  - echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+
+script:
+  - minecraft/build.sh
