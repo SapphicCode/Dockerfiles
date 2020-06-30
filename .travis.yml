@@ -1,0 +1,17 @@
+language: minimal
+
+services:
+  - docker
+
+cache:
+  directories:
+    "./cache"
+
+jobs:
+  include:
+    - stage: Build
+      install:
+        - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      script:
+        - minecraft/build.sh
+        - utils/push.sh
