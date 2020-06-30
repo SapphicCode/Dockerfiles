@@ -7,8 +7,9 @@ cache:
   directories:
     "./cache"
 
-install:
-  - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-
-script:
-  - minecraft/build.sh
+jobs:
+  include:
+    - install:
+        - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      script:
+        - minecraft/build.sh
