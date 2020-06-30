@@ -15,7 +15,3 @@ jobs:
       script:
         - minecraft/build.sh
         - utils/push.sh
-    - stage: Push
-      if: branch = master
-      script:
-        - utils/push.sh
