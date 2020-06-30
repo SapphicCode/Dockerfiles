@@ -42,17 +42,3 @@ build vanilla-release "${latest_release}"
 build vanilla-snapshot "${latest_snapshot}"
 # build paper
 build paper-release "${latest_release}" "https://papermc.io/api/v1/paper/${latest_release}/latest/download"
-
-# push to docker hub
-for image in $(docker images "${base}" --format "{{.Repository}}:{{.Tag}}"); do
-  image_id=$(docker images "${image}" --format "{{.ID}}")
-  push_file=cache/pushed.$(echo "${image}.${image_id}" | sha256sum | cut -d " " -f 1)
-  if ! [ -e "${push_file}" ]; then
-    echo Pushing "${image}"...
-    docker push "${image}" > /dev/null
-    echo Pushed image.
-    touch "${push_file}"
-  else
-    echo "Skipping push of ${image}, already pushed."
-  fi
-done
