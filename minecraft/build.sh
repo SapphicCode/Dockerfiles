@@ -1,5 +1,7 @@
 #!/bin/sh
 
+mkdir -p cache
+
 base=pandentia/minecraft
 
 manifest=$(curl -ss https://launchermeta.mojang.com/mc/game/version_manifest.json)
@@ -13,7 +15,7 @@ find_vanilla_url() {
 
 build() {
   canonical_image=${base}:"${1}"-"${2}"
-  build_file=built.$(echo "${canonical_image}" | sha256sum | cut -d " " -f 1)
+  build_file=cache/built.$(echo "${canonical_image}" | sha256sum | cut -d " " -f 1)
 	if ! [ -e "${build_file}" ]; then
     echo Building "${canonical_image}"...
     if [ -z "${3}" ]; then
@@ -44,7 +46,7 @@ build paper-release "${latest_release}" "https://papermc.io/api/v1/paper/${lates
 # push to docker hub
 for image in $(docker images ${base} --format "{{.Repository}}:{{.Tag}}"); do
   image_id=$(docker images "${image}" --format "{{.ID}}")
-  push_file=pushed.$(echo "${image}"."${image_id}" | sha256sum | cut -d " " -f 1)
+  push_file=cache/pushed.$(echo "${image}"."${image_id}" | sha256sum | cut -d " " -f 1)
   if ! [ -e "${push_file}" ]; then
     echo Pushing "${image}"...
     docker push "${image}" > /dev/null
