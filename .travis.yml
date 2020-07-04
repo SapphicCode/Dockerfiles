@@ -1,4 +1,4 @@
-language: minimal
+language: shell
 
 services:
   - docker
@@ -9,9 +9,14 @@ cache:
 
 jobs:
   include:
-    - stage: Build
-      install:
-        - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-      script:
-        - minecraft/build.sh
-        - utils/push.sh
+    - &docker-build
+      stage: Build
+      install: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      script: minecraft/build.sh
+      after_script: utils/push.sh
+    - <<: *docker-build
+      script: utils/generic_build.sh cassandra/jenkins cassandra-jenkins weekly
+    - <<: *docker-build
+      script: utils/generic_build.sh pleroma pleroma weekly
+    - <<: *docker-build
+      script: utils/generic_build.sh prosody prosody weekly
