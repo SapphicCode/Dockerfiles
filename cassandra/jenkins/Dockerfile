@@ -1,7 +1,7 @@
 FROM jenkins/jenkins:lts-alpine
 
 USER root
-RUN apk add --no-cache curl rsync jq docker ansible && \
+RUN apk add --no-cache curl rsync jq docker ansible restic && \
     chmod +s /usr/bin/docker
 
 USER jenkins
