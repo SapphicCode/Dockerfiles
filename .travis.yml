@@ -15,8 +15,8 @@ jobs:
       script: minecraft/build.sh
       after_script: utils/push.sh
     - <<: *docker-build
-      script: docker build cassandra/jenkins -t cassandra-jenkins:latest
+      script: docker build cassandra/jenkins -t $DOCKER_ROOT/cassandra-jenkins:latest
     - <<: *docker-build
-      script: docker build pleroma -t pleroma:latest
+      script: docker build pleroma -t $DOCKER_ROOT/pleroma:latest
     - <<: *docker-build
-      script: docker build prosody -t prosody:latest
+      script: docker build prosody -t $DOCKER_ROOT/prosody:latest
