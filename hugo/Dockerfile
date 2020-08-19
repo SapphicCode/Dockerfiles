@@ -1,2 +1,2 @@
 FROM alpine:edge
-RUN apk add --no-cache hugp
+RUN apk add --no-cache hugo
