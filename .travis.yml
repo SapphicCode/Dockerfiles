@@ -17,6 +17,8 @@ jobs:
     - <<: *docker-build
       script: docker build cassandra/jenkins -t $DOCKER_ROOT/cassandra-jenkins:latest
     - <<: *docker-build
+      script: docker build hugo -t $DOCKER_ROOT/hugo:latest
+    - <<: *docker-build
       script: docker build pleroma -t $DOCKER_ROOT/pleroma:latest
     - <<: *docker-build
       script: docker build prosody -t $DOCKER_ROOT/prosody:latest
