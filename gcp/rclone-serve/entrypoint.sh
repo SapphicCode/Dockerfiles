@@ -6,8 +6,9 @@ type = google cloud storage
 EOF
 
 if [ -n "$HTPASSWD" ]; then
-    arg_htpasswd="--htpasswd=passwd"
-    rclone copy gcp:$HTPASSWD ./passwd
+    file="$(basename "$HTPASSWD")"
+    arg_htpasswd="--htpasswd=$file"
+    rclone copy gcp:$HTPASSWD local:
 fi
 
 rclone serve webdav --addr=0.0.0.0:$PORT $arg_htpasswd $@ gcp:$STORE
