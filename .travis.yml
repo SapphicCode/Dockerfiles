@@ -11,14 +11,16 @@ jobs:
   include:
     - &docker-build
       stage: Build
-      install: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      install:
+        - docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD docker.io
+        - docker login -u $QUAY_USERNAME -p $QUAY_PASSWORD quay.io
       script: minecraft/build.sh
       after_script: utils/push.sh
     - <<: *docker-build
-      script: docker build cassandra/jenkins -t $DOCKER_ROOT/cassandra-jenkins:latest
+      script: docker build cassandra/jenkins -t $BUILD_ROOT/cassandra-jenkins:latest
     - <<: *docker-build
-      script: docker build hugo -t $DOCKER_ROOT/hugo:latest
+      script: docker build hugo -t $BUILD_ROOT/hugo:latest
     - <<: *docker-build
-      script: docker build pleroma -t $DOCKER_ROOT/pleroma:latest
+      script: docker build pleroma -t $BUILD_ROOT/pleroma:latest
     - <<: *docker-build
-      script: docker build prosody -t $DOCKER_ROOT/prosody:latest
+      script: docker build prosody -t $BUILD_ROOT/prosody:latest

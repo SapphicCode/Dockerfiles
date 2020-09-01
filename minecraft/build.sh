@@ -3,7 +3,7 @@
 # shellcheck disable=SC1091
 source utils/functions.sh
 
-base=$DOCKER_ROOT/minecraft
+base=$BUILD_ROOT/minecraft
 
 manifest=$(curl -ss https://launchermeta.mojang.com/mc/game/version_manifest.json)
 latest_release=$(echo "${manifest}" | jq -r .latest.release)

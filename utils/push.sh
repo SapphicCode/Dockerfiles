@@ -12,8 +12,10 @@ if [ -n "$TRAVIS" ]; then
 fi
 
 # push to docker hub
-for image in $(docker images --format "{{.Repository}}:{{.Tag}}" | grep "${DOCKER_ROOT}"); do
-  echo Pushing "${image}"...
-  docker push "${image}" > /dev/null || exit 1
+for image in $(docker images --format "{{.Repository}}:{{.Tag}}" | grep "${BUILD_ROOT}"); do
+  echo Pushing "${image}" to Docker Hub...
+  docker push "${DOCKER_ROOT}/${image#"${BUILD_ROOT}"}" > /dev/null || exit 1
+  echo Pushing "${image}" to Quay...
+  docker push "${QUAY_ROOT}/${image#"${BUILD_ROOT}"}" > /dev/null || exit 1
   echo Pushed image.
 done
