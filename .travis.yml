@@ -21,6 +21,6 @@ jobs:
     - <<: *docker-build
       script: docker build hugo -t $BUILD_ROOT/hugo:latest
     - <<: *docker-build
-      script: docker build pleroma -t $BUILD_ROOT/pleroma:latest
+      script: docker build pleroma -t $BUILD_ROOT/pleroma:latest || true
     - <<: *docker-build
       script: docker build prosody -t $BUILD_ROOT/prosody:latest
