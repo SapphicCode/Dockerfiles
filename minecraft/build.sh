@@ -39,6 +39,10 @@ build() {
 # build release
 build vanilla-release "${latest_release}"
 # build snapshot
-build vanilla-snapshot "${latest_snapshot}"
+if [ "${latest_release}" != "${latest_snapshot}" ]; then
+  build vanilla-snapshot "${latest_snapshot}"
+else
+  echo Skipping snapshot build, no new snapshot.
+fi
 # build paper
 build paper-release "${latest_release}" "https://papermc.io/api/v1/paper/${latest_release}/latest/download"
